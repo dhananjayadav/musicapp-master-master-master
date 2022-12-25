@@ -1,0 +1,37 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+.footerBox{
+    width: 100%;
+    height: 110vmin;
+    background-color: rgb(7,6,6);
+    display: flex;
+    flex-direction: column;
+    color: rgb(195,195,194);
+    align-items: center;
+}
+.footerBox > h1{
+    margin-top: 20vmin;
+    font-size: 5vmin;
+}
+.footerBox > p{
+    font-size: 3vmin;
+}
+.homemargin{
+    margin-top: 5vmin;
+}
+.spacetop{
+    margin-top: 1vmin;
+}
+.reach{
+    margin-top: 10vmin;
+}
+.logobox{
+    width: 36vmin;
+    height: 8vmin;
+    margin-top: 4vmin;
+    display: flex;
+    justify-content: space-between;
+}
