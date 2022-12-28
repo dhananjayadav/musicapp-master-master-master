@@ -5,6 +5,7 @@ import Home from "./Components/Home";
 import InputImage from "./Components/InputImage";
 import LinkPut from "./Components/LinkPut";
 import Onboarding from "./Components/Onboarding";
+import Payment from "./Components/Payment";
 import PlayMusic from "./Components/PlayMusic";
 import Profile from "./Components/Profile";
 import Signin from "./Components/Signin";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Signin" element={<Signin/>}></Route>
           <Route path="/onboarding" element={<Onboarding/>}></Route>
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/payment" element={<Payment />}></Route>
         </Routes>
       </Router>
       
