@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Css/PlayMusic.css'
 import './Css/Profile.css'
 // import {Link} from 'react-router-dom'
@@ -13,11 +13,31 @@ import soundcloud from './assests/2560px-Soundcloud_logo.svg-removebg-preview.pn
 import phone from './assests/icons8-phone-50.png'
 import whatsapp from './assests/icons8-whatsapp-32.png'
 import correct from './assests/icons8-correct-48 (2).png'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 function Profile() {
+  const [User, setUser] = useState(null);
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+  const getUserProfile = async()=>{
+    try{
+      const id = localStorage.getItem('user-id')
+      const {data} = await axios.post('http://localhost:4000/user/profile',{
+        id
+      })
+      const {user} = data;
+      setUser(user);
+    }catch(err){
+      console.log({err})
+    }
+  }
   return (
   <> 
-    <div className='profilepage'>
+    {
+      User ?
+      <div className='profilepage'>
         <div className='nav'>
             <h2>ONE BACKLINK</h2>
         </div>
@@ -25,11 +45,11 @@ function Profile() {
         <div className='profilefirst'>
              <div className='pro1'>
               <div className='prophoto'>
-                <img style={{height:"25vmin"}} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSacQ3PL--cuMZ8RJOTyjEBEo22_KjkrJiaIt24znMUQw&s" alt="" />
+                <img style={{height:"25vmin"}} src={`${User.image.secure_url}`} alt="" />
               </div>
               <div className='proname'>
                 <div>
-                <p className='name'>Saah Goswami</p>
+                <p className='name'>{User.name}</p>
                 <img src={correct} alt="" />
                 </div>
                 <p className='job'>Musician</p>
@@ -40,7 +60,7 @@ function Profile() {
               <div className='applink'>
                 <div className='insta'>
                   <div></div>
-                  <img style={{height:"4vmin"}} src={insta} alt="" />
+                  <Link to={User.instaId}><img style={{height:"4vmin"}} src={insta} alt="" /></Link>
                   <p>Instagram</p>
                   <div></div>
                 </div>
@@ -120,6 +140,8 @@ function Profile() {
               </div>
         </div>
     </div>
+    :<></>
+    }
   </>
   )
 }

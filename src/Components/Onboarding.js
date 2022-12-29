@@ -44,13 +44,13 @@ function Onboarding() {
       return;
     }
     const id = localStorage.getItem('user-id')
-    const res = await axios.post('http://localhost:4000/user/onboarding',{
+    await axios.post('http://localhost:4000/user/onboarding',{
       id,
       name,
       instaId,
       image:file
     })
-    console.log(res)
+    navigate(`/profile`)
    }catch(err){
     console.log(err)
    }

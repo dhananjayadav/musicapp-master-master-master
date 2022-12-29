@@ -7,8 +7,11 @@ import { useSelector , useDispatch } from 'react-redux'
 import { addDetails } from '../fileIndex';
 import { Button } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 function InputImage() {
   // const [file, setFile] = useState(image);
+  const globalState = useSelector((state)=> state.handleFiles)
   const [detail,setDetail] = useState({
     coverImage:image,
     name:'',
@@ -22,16 +25,22 @@ function InputImage() {
     }
     console.log({detail})
   const dispatch = useDispatch();
-  const submitForm = (e) =>{
+  const submitForm = async(e) =>{
     e.preventDefault()
-      dispatch(addDetails(detail))
-      console.log('hii')
-      navigate('/PlayMusic')
+      await dispatch(addDetails(detail))
+      try{
+          const res = await axios.post('http://localhost:4000/user/addSong',{
+            data:globalState
+          })
+          console.log({res});
+      }catch(err){
+        console.log({err})
+      }
   }
   return (
     <>
       <div className='InputPage'>
-           <form className='imagebox' onSubmit={submitForm}>
+           <form className='imagebox' onSubmit={(e) => submitForm(e)}>
              
              <div className='photoUpload'>
                   <h1>Cover</h1>
